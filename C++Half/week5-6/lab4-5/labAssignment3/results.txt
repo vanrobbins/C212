@@ -1,0 +1,16 @@
+Arithmetic Mean: 54
+Arithmetic Mean: 590.6
+Geometric Mean: 4.38433
+Geometric Mean: 27.0246
+Harmonic Mean: 4.37956
+Harmonic Mean: 3.81356
+Standard Deviation: 7.07107
+Standard Deviation: 22.4499
+Standard Deviation: 0
+Median: 21
+Mode: 3
+Variance: 50
+Maximum Number: 55
+Maximum Number: 500
+Minimum Number: 11
+Minimum Number: 100
