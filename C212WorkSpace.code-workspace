@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "C++Half/week5-6/lab4-5/labAssignment3"
 		}
 	],
 	"settings": {
@@ -15,7 +18,9 @@
 			"complex": "cpp",
 			"iosfwd": "cpp",
 			"ostream": "cpp",
-			"new": "cpp"
+			"new": "cpp",
+			"functional": "cpp",
+			"sstream": "cpp"
 		}
 	}
 }
