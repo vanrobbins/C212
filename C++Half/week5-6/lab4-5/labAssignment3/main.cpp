@@ -76,4 +76,5 @@ int main() {
         lineData.clear(); // Clear the vector for the next line of data
     }
     data.close();
+    cout<<"Success\nResults of calculations found in results.txt!";
 }
