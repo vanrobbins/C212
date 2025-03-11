@@ -3,19 +3,19 @@
 #include <sstream>
 #include "array_ops.h"
 using namespace std;
-
-// Function to count the number of sets in the file
 int numSets(string filename){
     int lines=0;
     string line;
     ifstream fileScores(filename);
+    if (!(fileScores.is_open())){
+        cerr<<"Error Opening File:"<<filename<<endl;
+        return -1;
+    }
     while(getline(fileScores, line)){
         lines++;
     }
     return lines;
 }
-
-// Function to create a 2D array from the file
 void createArray(string filename, int** arr, int arrSize[]){
     string line;
     string sinNum;
@@ -40,70 +40,53 @@ void createArray(string filename, int** arr, int arrSize[]){
     }
     fileScores.close();
 }
-
-// Function to convert an array to a string representation
-string printArray(int arr[], int size){
-    string str="[";
-    for(int i=1; i<size; i++){
-        str+=to_string(arr[i]);
-        if(i<size-1){
-            str+=", ";
+void flattenArray(int** arr, int arrSize[], int flatArr[], int amtSets){
+    int k=0;
+    for(int i=0; i<amtSets; i++){
+        for(int j=0; j<arrSize[i]; j++){
+            flatArr[k++]=arr[i][j];
         }
     }
-    str+="]";
-    return str;
 }
-
-// Function to output the results to a file
-void outputResults(string filename,int** arr, int arrSize[], int sets){
+void outputResults(string filename, double avg, int max, int min, int arr[], int size){
     ofstream fileResults(filename);
-    for(int i=0; i<sets; i++){
-        if (arr[i][0]==1){
-            fileResults<<"Average of "<<printArray(arr[i],arrSize[i])<<": "<<findAverage(arr[i],arrSize[i])<<endl;
+    fileResults<<"Average: "<<avg<<endl;
+    fileResults<<"Max: "<<max<<endl;
+    fileResults<<"Min: "<<min<<endl;
+    fileResults<<"Sorted Array: ";
+    for(int i=0; i<size; i++){
+        if (i%10==0){
+            fileResults<<endl;
         }
-        else if(arr[i][0]==2){
-            fileResults<<"Max of "<<printArray(arr[i],arrSize[i])<<": "<<findMax(arr[i],arrSize[i])<<endl;
-        }
-        else if(arr[i][0]==3){
-            fileResults<<"Min of "<<printArray(arr[i],arrSize[i])<<": "<<findMin(arr[i],arrSize[i])<<endl;
-        }
-        else if(arr[i][0]==4){
-            fileResults<<"Sort Array "<<printArray(arr[i],arrSize[i])<<": ";
-            sortArray(arr[i],arrSize[i]);
-            fileResults<<printArray(arr[i],arrSize[i])<<endl;
+        if(i!=size-1){  
+            fileResults<<arr[i]<<" ";
         }
         else{
-            fileResults<<"Invalid operation"<<endl;
+            fileResults<<arr[i];
         }
     }
-    fileResults.close();
 }
-
 int main(){
-    // Define file names
     string file="numbers.txt";
     string resultfile="results.txt";
-    
-    // Get the number of sets in the file
+    int totalNum=0;
     int amtSets=numSets(file);
-    
-    // Create a 2D array to store the numbers
     int** arr=new int*[amtSets];
     int arrSize[amtSets];
     createArray(file,arr,arrSize);
     
-    // Calculate the total number of elements
-    
-    
-    // Output the results
-    outputResults(resultfile,arr,arrSize,amtSets);
-    
-    // Deallocate memory
+    for(int i=0; i<amtSets; i++){
+        totalNum+=arrSize[i];
+    }
+    int flatArr[totalNum];
+    flattenArray(arr,arrSize,flatArr,amtSets);
+    sortArray(flatArr,totalNum);
+    outputResults("results.txt",findAverage(flatArr,totalNum),findMax(flatArr,totalNum),findMin(flatArr,totalNum),flatArr,totalNum);
+    //Deallocate memory
     for (int i = 0; i < amtSets; i++) {
         delete[] arr[i];
     }
     delete[] arr;
-    
     cout<<"Results have been written to results.txt"<<endl;
     return 0;
 }
