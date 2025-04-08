@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "JavaHalf/week9-10/labWeek8-9/labAssignment5/vehicles"
 		}
 	],
 	"settings": {
@@ -18,6 +21,7 @@
 			"new": "cpp",
 			"functional": "cpp",
 			"sstream": "cpp"
-		}
+		},
+		"java.configuration.updateBuildConfiguration": "interactive"
 	}
 }
