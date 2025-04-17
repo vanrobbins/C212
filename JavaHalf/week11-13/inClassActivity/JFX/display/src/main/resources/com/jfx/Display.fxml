@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.jfx.DisplayController" prefHeight="400.0" prefWidth="600.0" spacing="15" alignment="CENTER">
+   <children>
+      <Label fx:id="messageLabel" text="Enter a message:" />
+      <TextField fx:id="messageText" promptText="Type your message here" />
+      <Button fx:id="showButton" text="Show Message" onAction="#showButtonPressed" />
+   </children>
+</VBox>
